@@ -199,14 +199,14 @@ void ADE_Write16(unsigned int reg, unsigned int dat){
  }  
  
  void ADE_Init(){
-     
-     //start dsp
-     ADE_Write8(RUNREG,0x01);
+  
+     ADE_Write16(CFMODE,0x00A0);
+    
      //Write protection
      ADE_Write8(0xE7FE,0xAD);
-     ADE_Write8(0xE7E2,0x14);
-     ADE_Write8(0xE7FE,0xAD);
-     ADE_Write8(0xE7E2,0x04);
+     ADE_Write8(0xE7E3,0x80);
+     //start dsp
+     ADE_Write16(RUNREG,0x0001);
  
  } 
  
