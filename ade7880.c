@@ -1,67 +1,53 @@
  #include "ade7880.h"
  
 unsigned char ADE_Read8(unsigned int reg){
-    unsigned char b0;
-    char r1,r0;
+ 
+     unsigned char b0,r1,r0;
      r0=(unsigned char)(reg & 0xFF);
      r1=(unsigned char)(reg >> 8);
-     ADE_SpiMode(1);
      GPIOA_ODRbits.ODR15=0;
      Delay_us(10);
-     
      SPI_Write(0x01);
-      SPI_Write(r1);
+     SPI_Write(r1);
      SPI_Write(r0);
      b0=SPI_Read(0x00);
-     
      GPIOA_ODRbits.ODR15=1; 
      Delay_us(10);
      return b0;
 }
-
 unsigned int ADE_Read16(unsigned int reg){
-    
-    unsigned char b1,b0;
-    char r1,r0;
-    
-    r0=(unsigned char)(reg & 0xFF);
+ 
+     unsigned char b0,r1,r0;
+     r0=(unsigned char)(reg & 0xFF);
      r1=(unsigned char)(reg >> 8);
-    ADE_SpiMode(1);
-     
-    GPIOA_ODRbits.ODR15=0;
-    Delay_us(10);
-
-    SPI_Write(0x01);
+     GPIOA_ODRbits.ODR15=0;
+     Delay_us(10);
+     SPI_Write(0x01);
      SPI_Write(r1);
      SPI_Write(r0);
-    b1=SPI_Read(0x00);
-    b0=SPI_Read(0x00);
-   
-    GPIOA_ODRbits.ODR15=1; 
-    Delay_us(10);
-    
+     b1=SPI_Read(0x00);
+     b0=SPI_Read(0x00);
+     GPIOA_ODRbits.ODR15=1; 
+     Delay_us(10);
+       
     return (unsigned int)b1<<8 | (unsigned int)b0;
 }
 
 unsigned long ADE_Read24(unsigned int reg){
     unsigned char b2,b1,b0;
-    char r1,r0;
-    
+    char r1,r0;  
+ 
     r0=(unsigned char)(reg & 0xFF);
     r1=(unsigned char)(reg >> 8);
      
-     ADE_SpiMode(1);
-     
     GPIOA_ODRbits.ODR15=0;
-    Delay_us(10);
-    
+    Delay_us(10);   
     SPI_Write(0x01);
-     SPI_Write(r1);
-     SPI_Write(r0);
+    SPI_Write(r1);
+    SPI_Write(r0);
     b2=SPI_Read(0x00);
     b1=SPI_Read(0x00);
     b0=SPI_Read(0x00);
-    
     GPIOA_ODRbits.ODR15=1; 
     Delay_us(10);
     return (unsigned long)b2<<16 | (unsigned long)b1<<8 | (unsigned long)b0;
@@ -71,46 +57,37 @@ unsigned long ADE_Read32(unsigned int reg){
 
     unsigned char b3,b2,b1,b0;
     char r1,r0;
-    
+ 
     r0=(unsigned char)(reg & 0xFF);
     r1=(unsigned char)(reg >> 8);
-    
-    ADE_SpiMode(1);
-     
     GPIOA_ODRbits.ODR15=0;
     Delay_us(10);
-    
+ 
     SPI_Write(0x01);
-     SPI_Write(r1);
-     SPI_Write(r0);
+    SPI_Write(r1);
+    SPI_Write(r0);
     b3=SPI_Read(0x00);
     b2=SPI_Read(0x00);
     b1=SPI_Read(0x00);
     b0=SPI_Read(0x00);
     
     GPIOA_ODRbits.ODR15=1; 
-    Delay_us(10);
-    
+    Delay_us(10);    
     return (unsigned long)b3<<24 | (unsigned long)b2<<16 | (unsigned long)b1<<8 | (unsigned long)b0;
 }
 
 void ADE_Write8(unsigned int reg ,unsigned char dat){
 
-     char r1,r0;
-     
+     char r1,r0;     
      r0=(unsigned char)(reg & 0xFF);
      r1=(unsigned char)(reg >> 8);
-     
-     ADE_SpiMode(0);
-     
+ 
      GPIOA_ODRbits.ODR15=0;
      Delay_us(10);
-     
      SPI_Write(0x00);
       SPI_Write(r1);
      SPI_Write(r0);
-     SPI_Write(dat);
-     
+     SPI_Write(dat);   
      GPIOA_ODRbits.ODR15=1; 
      Delay_us(10);
 }
@@ -118,24 +95,19 @@ void ADE_Write8(unsigned int reg ,unsigned char dat){
 void ADE_Write16(unsigned int reg, unsigned int dat){
      
      char b0,b1;
-     char r1,r0;
-     
+     char r1,r0;     
      b0=(unsigned char)(dat & 0xFF);
      b1=(unsigned char)(dat >> 8);
-     
      r0=(unsigned char)(reg & 0xFF);
      r1=(unsigned char)(reg >> 8);
-     
-     ADE_SpiMode(0);
+
      GPIOA_ODRbits.ODR15=0;
-     Delay_us(10);
-     
+     Delay_us(10);  
      SPI_Write(0x00);
-      SPI_Write(r1);
+     SPI_Write(r1);
      SPI_Write(r0);
      SPI_Write(b1);
-     SPI_Write(b0);
-     
+     SPI_Write(b0);     
      GPIOA_ODRbits.ODR15=1; 
      Delay_us(10);
 
