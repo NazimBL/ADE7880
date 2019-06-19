@@ -35,28 +35,24 @@ void main() {
      UART1_Write_Text(txt);
      UART1_Write('\n');
      UART1_Write('\r');
-        
-     checksum=getVRMS(0);
+      checksum=getVRMS(0);
      LongLongUnsignedToHex(checksum, txt);
      UART1_Write_Text("voltage: ");
      UART1_Write_Text(txt);
      UART1_Write('\n');
      UART1_Write('\r');
-    
      checksum=getWatt(0);        
      LongLongUnsignedToHex(checksum, txt);
      UART1_Write_Text("active power: ");
      UART1_Write_Text(txt);
      UART1_Write('\n');
      UART1_Write('\r');
-     
      checksum=getVA(0);      
      LongLongUnsignedToHex(checksum, txt);
      UART1_Write_Text("apparent power: ");
      UART1_Write_Text(txt);
      UART1_Write('\n');
      UART1_Write('\r');
-     
      angle=getPhaseShift(0);
      IntToStr(angle, txt3);
      UART1_Write_Text("phase: ");
