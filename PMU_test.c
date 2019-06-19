@@ -19,25 +19,15 @@ void main() {
     Delay_ms(400);
     ADE_Init();
     ADE_SpiEnable();
-    
-     //ADE_Write16(MASK0,0x0200); 
-      //status=ADE_Read16(MASK0);
      
     while(1){
-     
-     
+         
      checksum=ADE_Read32(CHECKSUM);      
-        
      LongLongUnsignedToHex(checksum, txt);
      UART1_Write_Text("checksum: ");
      UART1_Write_Text(txt);
      UART1_Write('\n');
      UART1_Write('\r');
-     
-     
-     //while((status && 0x0200)!=0x0200);
-      //ADE_Write16(STATUS0,0x0200);
-    
      
      checksum=getIRMS(0);
      LongLongUnsignedToHex(checksum, txt);
@@ -45,18 +35,15 @@ void main() {
      UART1_Write_Text(txt);
      UART1_Write('\n');
      UART1_Write('\r');
-     
-     
+        
      checksum=getVRMS(0);
      LongLongUnsignedToHex(checksum, txt);
      UART1_Write_Text("voltage: ");
      UART1_Write_Text(txt);
      UART1_Write('\n');
      UART1_Write('\r');
-     
-     
-     checksum=getWatt(0);      
-        
+    
+     checksum=getWatt(0);        
      LongLongUnsignedToHex(checksum, txt);
      UART1_Write_Text("active power: ");
      UART1_Write_Text(txt);
@@ -64,7 +51,6 @@ void main() {
      UART1_Write('\r');
      
      checksum=getVA(0);      
-        
      LongLongUnsignedToHex(checksum, txt);
      UART1_Write_Text("apparent power: ");
      UART1_Write_Text(txt);
@@ -77,13 +63,8 @@ void main() {
      UART1_Write_Text(txt3);
      UART1_Write('\n');
      UART1_Write('\r');
-       
-     
-     Delay_ms(1000);
-     
-     
+      Delay_ms(1000); 
      }
-
 }
 
 void SpiSetup(){
