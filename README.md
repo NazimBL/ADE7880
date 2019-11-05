@@ -5,3 +5,5 @@ the ade7880 files contains the register definition and the differents functions 
 to setup the energy meter as well as read and write data to registers.
 
 The Pmu.c is the main file of the project
+
+The libbrary is also compatible with most ADE78xx family.
